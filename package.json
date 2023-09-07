@@ -2,9 +2,9 @@
   "name": "clone-marstube",
   "version": "1.0.0",
   "description": "MarsTube Clone built using Node.js, Express, Mongo and ES6",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon --exec babel-node src/main.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/marshot9420/clone-marstube/issues"
   },
-  "homepage": "https://github.com/marshot9420/clone-marstube#readme"
+  "homepage": "https://github.com/marshot9420/clone-marstube#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.15",
+    "@babel/node": "^7.22.15",
+    "@babel/preset-env": "^7.22.15",
+    "nodemon": "^3.0.1"
+  }
 }
