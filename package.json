@@ -1,0 +1,19 @@
+{
+  "name": "clone-marstube",
+  "version": "1.0.0",
+  "description": "MarsTube Clone built using Node.js, Express, Mongo and ES6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marshot9420/clone-marstube.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marshot9420/clone-marstube/issues"
+  },
+  "homepage": "https://github.com/marshot9420/clone-marstube#readme"
+}
