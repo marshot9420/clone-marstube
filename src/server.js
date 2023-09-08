@@ -1,3 +1,4 @@
+import express, { urlencoded } from 'express';
 import { appConfig } from './configs/app.config';
 import { authRouter, rootRouter } from './routers';
 
@@ -6,6 +7,9 @@ export const startServer = (app) => {
 
   app.set('view engine', 'pug');
   app.set('views', process.cwd() + '/src/views');
+
+  app.use(urlencoded({ extended: true }));
+  app.use(express.json());
 
   app.use('/', rootRouter);
   app.use('/auth', authRouter);
