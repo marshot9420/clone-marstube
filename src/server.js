@@ -1,5 +1,5 @@
 import { appConfig } from './configs/app.config';
-import { authRouter } from './routers';
+import { authRouter, rootRouter } from './routers';
 
 export const startServer = (app) => {
   const APP = appConfig();
@@ -7,6 +7,7 @@ export const startServer = (app) => {
   app.set('view engine', 'pug');
   app.set('views', process.cwd() + '/src/views');
 
+  app.use('/', rootRouter);
   app.use('/auth', authRouter);
 
   const handleListening = () => {
