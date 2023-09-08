@@ -1,3 +1,5 @@
+import { PAGETITLE, PUG } from '../constants';
+
 export const home = (req, res) => {
-  return res.render('pages/home', { pageTitle: 'Home' });
+  return res.render(PUG.PAGES.HOME, { pageTitle: PAGETITLE.HOME });
 };
