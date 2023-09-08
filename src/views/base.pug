@@ -3,8 +3,7 @@ html(lang='ko')
     head 
         include partials/meta
         include partials/meta-og
+        link(rel='stylesheet' href='https://unpkg.com/mvp.css')
         title #{pageTitle} | MARSTUBE
     body
-        main 
-            block content
-        include layouts/footer
+        include layouts/layout
