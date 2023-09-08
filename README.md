@@ -93,3 +93,9 @@ yarn start:dev  # 개발 모드로 실행
 👉 [요구사항 명세서](./markdown/RQ/RQ.md)
 
 👉 [기술적 요구사항 명세서](./markdown/RQ/TECHRQ.md)
+
+<br>
+
+**데이터 설계**
+
+👉 [데이터 설계도](./markdown/Data_Design/Data_Design.md)
