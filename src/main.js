@@ -2,8 +2,12 @@ import dotenv from 'dotenv';
 import path from 'path';
 import express from 'express';
 
+import { dbConfig } from './configs';
+
 const envPath = path.join(__dirname, `../.env.${process.env.NODE_ENV}`);
 dotenv.config({ path: envPath });
+
+dbConfig();
 
 const app = express();
 
