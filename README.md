@@ -91,3 +91,5 @@ yarn start:dev  # 개발 모드로 실행
 <br>
 
 👉 [요구사항 명세서](./markdown/RQ/RQ.md)
+
+👉 [기술적 요구사항 명세서](./markdown/RQ/TECHRQ.md)
