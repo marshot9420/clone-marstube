@@ -5,6 +5,7 @@ import { loggerConfig } from './logger.config';
 import { pugConfig } from './pug.config';
 import { middlewareConfig } from './middleware.config';
 import { routerConfig } from './router.config';
+import { sessionConfig } from './session.config';
 
 export const initConfigs = (app) => {
   appConfig();
@@ -14,4 +15,5 @@ export const initConfigs = (app) => {
   middlewareConfig(app);
   pugConfig(app);
   routerConfig(app);
+  sessionConfig(app);
 };
