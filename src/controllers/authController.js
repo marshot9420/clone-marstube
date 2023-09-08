@@ -56,18 +56,16 @@ export const postLogin = async (req, res) => {
   if (!user) {
     return res.status(400).render(PUG.PAGES.LOGIN, {
       pageTitle,
-      errorMessage: '존재하지 않는 닉네임입니다.',
+      errorMessage: ERROR.WRONG.USERNAME,
     });
   }
 
   const checkPassword = await bcrypt.compare(password, user.password);
   if (!checkPassword) {
-    return res
-      .status(400)
-      .render(PUG.PAGES.LOGIN, {
-        pageTitle,
-        errorMessage: '비밀번호가 일치하지 않습니다.',
-      });
+    return res.status(400).render(PUG.PAGES.LOGIN, {
+      pageTitle,
+      errorMessage: ERROR.WRONG.PASSWORD,
+    });
   }
 
   return res.redirect(URL.ROOT.HOME);
