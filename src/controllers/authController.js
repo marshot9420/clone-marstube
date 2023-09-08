@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+
 import { ERROR, PAGETITLE, PUG, URL } from '../constants';
 import { User } from '../models';
 
@@ -40,4 +42,31 @@ export const postJoin = async (req, res) => {
     location,
   });
   return res.redirect(URL.AUTH.LOGIN);
+};
+
+export const getLogin = (req, res) => {
+  return res.render(PUG.PAGES.LOGIN, { pageTitle: PAGETITLE.LOGIN });
+};
+
+export const postLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const pageTitle = PAGETITLE.LOGIN;
+  const user = await User.findOne({ username });
+
+  if (!user) {
+    return res.status(400).render(PUG.PAGES.LOGIN, {
+      pageTitle,
+      errorMessage: ERROR.WRONG.USERNAME,
+    });
+  }
+
+  const checkPassword = await bcrypt.compare(password, user.password);
+  if (!checkPassword) {
+    return res.status(400).render(PUG.PAGES.LOGIN, {
+      pageTitle,
+      errorMessage: ERROR.WRONG.PASSWORD,
+    });
+  }
+
+  return res.redirect(URL.ROOT.HOME);
 };

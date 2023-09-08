@@ -2,6 +2,7 @@ export const PUG = {
   PAGES: {
     HOME: 'pages/home',
     JOIN: 'pages/join',
+    LOGIN: 'pages/login',
   },
 };
 
