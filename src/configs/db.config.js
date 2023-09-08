@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const dbConfig = () => {
+export const dbConfig = () => {
   mongoose.connect(process.env.DB_URL);
 
   const dbConnection = mongoose.connection;
@@ -10,5 +10,3 @@ const dbConfig = () => {
   dbConnection.on('error', handleError);
   dbConnection.once('open', handleOpen);
 };
-
-export default dbConfig;

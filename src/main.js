@@ -1,21 +1,5 @@
-import dotenv from 'dotenv';
-import path from 'path';
-import express from 'express';
+import { initConfigs } from './configs';
+import { startServer } from './server';
 
-import { dbConfig } from './configs';
-
-const envPath = path.join(__dirname, `../.env.${process.env.NODE_ENV}`);
-dotenv.config({ path: envPath });
-
-dbConfig();
-
-const app = express();
-
-const BASE_URL = process.env.BASE_URL;
-const PORT = process.env.PORT || 4000;
-
-const handleListening = () => {
-  console.log(`✅ Server listening on: ${BASE_URL}:${PORT}`);
-};
-
-app.listen(PORT, handleListening);
+initConfigs();
+startServer();
