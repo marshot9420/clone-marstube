@@ -9,5 +9,6 @@ export const URL = {
   OAUTH: {
     GITHUB_START: 'https://github.com/login/oauth/authorize',
     GITHUB_FINISH: 'https://github.com/login/oauth/access_token',
+    GITHUB_API: 'https://api.github.com',
   },
 };
