@@ -70,3 +70,14 @@ export const postLogin = async (req, res) => {
 
   return res.redirect(URL.ROOT.HOME);
 };
+
+export const startGithubLogin = (req, res) => {
+  const config = {
+    client_id: process.env.GH_CLIENT,
+    allow_signup: false,
+    scope: 'read:user user:email',
+  };
+
+  console.log(config);
+  return res.redirect(URL.ROOT.HOME);
+};
