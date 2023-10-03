@@ -1,5 +1,6 @@
 import MongoStore from 'connect-mongo';
 import session from 'express-session';
+
 import { localsMiddleware } from '../middlewares';
 
 export const sessionConfig = (app) => {

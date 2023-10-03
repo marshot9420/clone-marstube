@@ -2,7 +2,7 @@
   "name": "clone-marstube",
   "version": "1.0.0",
   "description": "MarsTube Clone built using Node.js, Express, Mongo and ES6",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon --exec babel-node src/main.js",
     "start:prod": "NODE_ENV=production node src/main.js"
@@ -31,6 +31,7 @@
     "express-session": "^1.17.3",
     "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.7.0",
     "pug": "^3.0.2"
   }
 }

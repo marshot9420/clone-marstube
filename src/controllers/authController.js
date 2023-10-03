@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import fetch from 'node-fetch';
 
 import { ERROR, PAGETITLE, PUG, URL } from '../constants';
 import { User } from '../models';
@@ -69,4 +70,74 @@ export const postLogin = async (req, res) => {
   }
 
   return res.redirect(URL.ROOT.HOME);
+};
+
+export const startGithubLogin = (req, res) => {
+  const config = {
+    client_id: process.env.GH_CLIENT,
+    allow_signup: false,
+    scope: 'read:user user:email',
+  };
+  const params = new URLSearchParams(config).toString();
+  const finishURL = `${URL.OAUTH.GITHUB_START}?${params}`;
+
+  return res.redirect(finishURL);
+};
+
+export const finishGithubLogin = async (req, res) => {
+  const config = {
+    client_id: process.env.GH_CLIENT,
+    client_secret: process.env.GH_SECRET,
+    code: req.query.code,
+  };
+  const params = new URLSearchParams(config).toString();
+  const finishURL = `${URL.OAUTH.GITHUB_FINISH}?${params}`;
+  const tokenRequest = await (
+    await fetch(finishURL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+      },
+    })
+  ).json();
+  if ('access_token' in tokenRequest) {
+    const { access_token } = tokenRequest;
+    const apiURL = URL.OAUTH.GITHUB_API;
+    const userData = await (
+      await fetch(`${apiURL}/user`, {
+        headers: {
+          Authorization: `token ${access_token}`,
+        },
+      })
+    ).json();
+    const emailData = await (
+      await fetch(`${apiURL}/user/emails`, {
+        headers: {
+          Authorization: `token ${access_token}`,
+        },
+      })
+    ).json();
+    const emailObj = emailData.find(
+      (email) => email.primary === true && email.verified === true,
+    );
+    if (!emailObj) {
+      return res.redirect(URL.AUTH.LOGIN);
+    }
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
+      user = await User.create({
+        name: userData.name,
+        email: userData.email,
+        username: userData.login,
+        password: '',
+        socialOnly: true,
+        location: userData.location,
+      });
+    }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect(URL.ROOT.HOME);
+  } else {
+    return res.redirect(URL.AUTH.LOGIN);
+  }
 };
