@@ -71,3 +71,13 @@ export const handleGithubLogin = async (userData, emailData) => {
 export const logoutUser = (req) => {
   req.session.destroy();
 };
+
+export const deleteUserAccount = async (userId) => {
+  const user = await User.findById(userId);
+
+  if (!user) {
+    throw new Error(ERROR.NOT_FOUND.USER);
+  }
+
+  await user.deleteOne();
+};
