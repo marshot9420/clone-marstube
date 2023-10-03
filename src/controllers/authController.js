@@ -6,6 +6,7 @@ import {
   checkPasswordMatches,
   checkUsernameExists,
   createUserAccount,
+  deleteUserAccount,
   findUserByUsername,
   handleGithubLogin,
   logoutUser,
@@ -124,4 +125,20 @@ export const finishGithubLogin = async (req, res) => {
 export const logout = (req, res) => {
   logoutUser(req);
   return res.redirect(URL.ROOT.HOME);
+};
+
+export const deleteAccount = async (req, res) => {
+  try {
+    const userId = req.session.user._id;
+
+    await deleteUserAccount(userId);
+
+    req.session.destroy();
+    res.redirect(URL.ROOT.HOME);
+  } catch (error) {
+    return res.status(400).render(PUG.PAGES.HOME, {
+      pageTitle: PAGETITLE.HOME,
+      errorMessage: error.message,
+    });
+  }
 };
