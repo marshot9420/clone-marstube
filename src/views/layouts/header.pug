@@ -1,11 +1,14 @@
 header 
-    nav 
-        ul 
-            li
-                a(href='/') 홈
-        ul 
-            li 
-                a(href='/auth/join') 회원가입
-        ul 
-            li 
-                a(href='/auth/login') 로그인
+    a(href='/') 홈
+    if !loggedIn
+        nav
+            ul
+                li 
+                    a(href='/auth/join') 회원가입
+                li 
+                    a(href='/auth/login') 로그인
+    else
+        nav 
+            ul
+                li 
+                    a(href='/auth/logout') 로그아웃
