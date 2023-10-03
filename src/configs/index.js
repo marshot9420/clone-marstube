@@ -14,6 +14,6 @@ export const initConfigs = (app) => {
   loggerConfig(app);
   middlewareConfig(app);
   pugConfig(app);
-  routerConfig(app);
   sessionConfig(app);
+  routerConfig(app);
 };

@@ -52,7 +52,7 @@ export const getLogin = (req, res) => {
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = PAGETITLE.LOGIN;
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialOnly: false });
 
   if (!user) {
     return res.status(400).render(PUG.PAGES.LOGIN, {
@@ -68,7 +68,8 @@ export const postLogin = async (req, res) => {
       errorMessage: ERROR.WRONG.PASSWORD,
     });
   }
-
+  req.session.loggedIn = true;
+  req.session.user = user;
   return res.redirect(URL.ROOT.HOME);
 };
 
@@ -141,4 +142,9 @@ export const finishGithubLogin = async (req, res) => {
   } else {
     return res.redirect(URL.AUTH.LOGIN);
   }
+};
+
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect(URL.ROOT.HOME);
 };
